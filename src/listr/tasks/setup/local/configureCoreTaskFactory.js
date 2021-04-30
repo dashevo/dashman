@@ -162,7 +162,10 @@ function configureCoreTaskFactory(
                       options: { persistentOutput: true },
                     },
                     {
-                      task: () => registerMasternodeTask(config),
+                      task: () => {
+                        console.log(`config when about to start registerMasternodeTask: ${config}`);
+                        registerMasternodeTask(config);
+                      },
                     },
                   ]),
                 }));

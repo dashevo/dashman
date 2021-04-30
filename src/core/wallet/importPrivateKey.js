@@ -7,7 +7,7 @@
  * @return {Promise<void>}
  */
 async function importPrivateKey(coreService, privateKey) {
-  console.log(`ci debug: ${privateKey}`);
+  console.log(`ci debug in importPrivateKey: ${privateKey}`);
   return coreService.getRpcClient().importPrivKey(privateKey);
 }
 

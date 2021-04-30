@@ -55,6 +55,7 @@ function registerMasternodeTaskFactory(
       {
         title: 'Import funding private key',
         task: async (ctx, task) => {
+          console.log(`context before importing private key: ${ctx}`);
           await importPrivateKey(ctx.coreService, ctx.fundingPrivateKeyString);
 
           // eslint-disable-next-line no-param-reassign
