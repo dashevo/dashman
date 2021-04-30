@@ -163,7 +163,7 @@ function configureCoreTaskFactory(
                     },
                     {
                       task: () => {
-                        console.log(`config when about to start registerMasternodeTask: ${config}`);
+                        console.log(`config when about to start registerMasternodeTask: ${JSON.stringify(config)}`);
                         registerMasternodeTask(config);
                       },
                     },
