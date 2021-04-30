@@ -129,7 +129,7 @@ function setupRegularPresetTaskFactory(
 
           const fundingPrivateKey = new PrivateKey(ctx.fundingPrivateKeyString, ctx.preset);
           ctx.fundingAddress = fundingPrivateKey.toAddress(ctx.preset).toString();
-
+          console.log(`ci debug: ${fundingPrivateKey}`);
           // Write configs
           const configFiles = renderServiceTemplates(ctx.config);
           writeServiceConfigs(ctx.config.getName(), configFiles);
