@@ -81,43 +81,43 @@ function startGroupNodesTaskFactory(
           return new Listr(tasks, { concurrent: true });
         },
       },
-      {
-        title: 'Adjust Core mock time',
-        enabled: () => minerConfig && minerConfig.get('network') === NETWORK_LOCAL,
-        task: async () => {
-          const minerInterval = minerConfig.get('core.miner.interval');
-          const secondsToAdd = 150;
-
-          const tasks = configGroup.map((config) => ({
-            title: `Adjust ${config.getName()} mock time`,
-            task: async () => {
-              /* eslint-disable no-useless-escape */
-              await dockerCompose.execCommand(
-                config.toEnvs(),
-                'core',
-                [
-                  'bash',
-                  '-c',
-                  `
-              while true
-              do
-                response=\$(dash-cli getblockchaininfo)
-                mediantime=\$(echo \${response} | grep -o -E '\"mediantime\"\: [0-9]+' |  cut -d ' ' -f2)
-                mocktime=\$((mediantime + ${secondsToAdd}))
-                dash-cli setmocktime \$mocktime
-                sleep ${minerInterval}
-              done
-              `,
-                ],
-                ['--detach'],
-              );
-              /* eslint-enable no-useless-escape */
-            },
-          }));
-
-          return new Listr(tasks, { concurrent: true });
-        },
-      },
+      // {
+      //   title: 'Adjust Core mock time',
+      //   enabled: () => minerConfig && minerConfig.get('network') === NETWORK_LOCAL,
+      //   task: async () => {
+      //     const minerInterval = minerConfig.get('core.miner.interval');
+      //     const secondsToAdd = 150;
+      //
+      //     const tasks = configGroup.map((config) => ({
+      //       title: `Adjust ${config.getName()} mock time`,
+      //       task: async () => {
+      //         /* eslint-disable no-useless-escape */
+      //         await dockerCompose.execCommand(
+      //           config.toEnvs(),
+      //           'core',
+      //           [
+      //             'bash',
+      //             '-c',
+      //             `
+      //         while true
+      //         do
+      //           response=\$(dash-cli getblockchaininfo)
+      //           mediantime=\$(echo \${response} | grep -o -E '\"mediantime\"\: [0-9]+' |  cut -d ' ' -f2)
+      //           mocktime=\$((mediantime + ${secondsToAdd}))
+      //           dash-cli setmocktime \$mocktime
+      //           sleep ${minerInterval}
+      //         done
+      //         `,
+      //           ],
+      //           ['--detach'],
+      //         );
+      //         /* eslint-enable no-useless-escape */
+      //       },
+      //     }));
+      //
+      //     return new Listr(tasks, { concurrent: true });
+      //   },
+      // },
       {
         title: 'Start a miner',
         enabled: () => minerConfig && minerConfig.get('network') === NETWORK_LOCAL,
