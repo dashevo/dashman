@@ -193,6 +193,10 @@ module.exports = {
           config.platform.drive.abci.docker.image = systemConfigs.base.platform
             .drive.abci.docker.image;
         }
+
+        if (typeof config.core.tor === 'undefined') {
+          config.core.tor = systemConfigs.base.core.tor;
+        }
       });
 
     // Set validator set LLMQ Type

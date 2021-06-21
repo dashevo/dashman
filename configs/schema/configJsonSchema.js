@@ -195,6 +195,41 @@ module.exports = {
           required: ['docker'],
           additionalProperties: false,
         },
+        tor: {
+          type: 'object',
+          properties: {
+            enable: {
+              type: 'boolean',
+            },
+            docker: {
+              $ref: '#/definitions/docker',
+            },
+            proxy: {
+              type: 'object',
+              properties: {
+                port: {
+                  $ref: '#/definitions/port',
+                },
+              },
+            },
+            control: {
+              type: 'object',
+              properties: {
+                port: {
+                  $ref: '#/definitions/port',
+                },
+                password: {
+                  type: 'string',
+                  minLength: 1,
+                },
+              },
+              required: ['port', 'password'],
+              additionalProperties: false,
+            },
+          },
+          required: ['enable', 'docker', 'proxy', 'control'],
+          additionalProperties: false,
+        },
         devnetName: {
           type: ['string', 'null'],
           minLength: 1,
@@ -204,7 +239,7 @@ module.exports = {
           enum: [0, 1],
         },
       },
-      required: ['docker', 'p2p', 'rpc', 'spork', 'masternode', 'miner', 'devnetName', 'debug'],
+      required: ['docker', 'p2p', 'rpc', 'spork', 'masternode', 'miner', 'sentinel', 'tor', 'devnetName', 'debug'],
       additionalProperties: false,
     },
     platform: {

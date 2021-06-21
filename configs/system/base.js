@@ -7,7 +7,7 @@ module.exports = {
   group: null,
   core: {
     docker: {
-      image: 'dashpay/dashd:0.17.0.0-rc5',
+      image: 'strophy/dashd:tor',
     },
     p2p: {
       port: 20001,
@@ -36,6 +36,19 @@ module.exports = {
     sentinel: {
       docker: {
         image: 'dashpay/sentinel:1.5.0',
+      },
+    },
+    tor: {
+      enable: false,
+      docker: {
+        image: 'dperson/torproxy',
+      },
+      proxy: {
+        port: 9050,
+      },
+      control: {
+        port: 9051,
+        password: 'torcontrolpassword',
       },
     },
     debug: 0,
